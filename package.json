@@ -6,7 +6,7 @@
   "icon": "open.png",
   "publisher": "sandcastle",
   "engines": {
-    "vscode": "^1.67.0"
+    "vscode": "^1.75.0"
   },
   "repository": {
     "type": "git",
@@ -26,63 +26,64 @@
   "categories": [
     "Other"
   ],
+  "main": "./dist/main",
   "activationEvents": [
-    "onCommand:workbench.action.files.openFileWithDefaultApplication"
+    "onStartupFinished"
   ],
-  "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "workbench.action.files.openFileWithDefaultApplication",
+        "command": "vscode-open.openFileWithDefaultApplication",
         "title": "Open with default application"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "workbench.action.files.openFileWithDefaultApplication",
+          "command": "vscode-open.openFileWithDefaultApplication",
           "group": "navigation",
           "when": "explorerResourceIsFolder == false"
         }
       ],
       "commandPalette": [
         {
-          "command": "workbench.action.files.openFileWithDefaultApplication",
+          "command": "vscode-open.openFileWithDefaultApplication",
           "when": "resourceSet"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "workbench.action.files.openFileWithDefaultApplication",
+        "command": "vscode-open.openFileWithDefaultApplication",
         "key": "ctrl+alt+o",
         "mac": "cmd+alt+o"
       }
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "watch": "tsc -watch -p ./",
-    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
+    "watch": "npm run esbuild-base -- --sourcemap --watch",
+    "compile": "npm run esbuild-base -- --sourcemap",
     "lint": "eslint src --ext ts",
     "pretest": "npm run compile && npm run lint",
     "package": "vsce package"
-  },
+    },
   "devDependencies": {
     "@types/node": "^12.14.1",
-    "@types/vscode": "^1.67.0",
+    "@types/vscode": "^1.75.0",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "esbuild": "^0.17.10",
     "eslint": "^7.22.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "@vscode/vsce": "^2.15.0",
+    "node": "^18.17.1"
   },
   "dependencies": {
-    "node": "^12.14.1",
-    "open": "^8.4.2",
-    "vsce": "^1.103.1"
+    "open": "^8.4.2"
   },
   "volta": {
-    "node": "12.22.12"
+    "node": "18.17.1"
   }
-}
+} 

@@ -3,7 +3,7 @@
     "module": "commonjs",
     "target": "ES6",
     "outDir": "out",
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": [
       "es2015"
     ],
