@@ -63,8 +63,8 @@
   "scripts": {
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
-    "watch": "npm run esbuild-base -- --sourcemap --watch",
-    "compile": "npm run esbuild-base -- --sourcemap",
+    "watch": "npm run esbuild-base -- --sourcemap --outfile=out/main.js --watch",
+    "compile": "npm run esbuild-base -- --sourcemap --outfile=out/main.js",
     "lint": "eslint src --ext ts",
     "pretest": "npm run compile && npm run lint",
     "package": "vsce package"
