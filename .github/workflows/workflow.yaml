@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+    - created
+
+jobs:
+  build:
+    name: job1
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - name: Publish
+        if: github.event_name == 'release'
+        run: npm run deploy
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}

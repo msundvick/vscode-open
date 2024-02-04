@@ -4,13 +4,16 @@
   "description": "Opens the current file with the default for the OS",
   "version": "0.2.2",
   "icon": "open.png",
-  "publisher": "sandcastle",
+	"publisher": "michael-sundvick",
+	"author": {
+		"name": "Michael Sundvick"
+	},
   "engines": {
     "vscode": "^1.75.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sandcastle/vscode-open"
+    "url": "https://github.com/msundvick/vscode-open"
   },
   "keywords": [
     "open",
@@ -19,7 +22,7 @@
     "display",
     "vscode"
   ],
-  "homepage": "https://github.com/sandcastle/vscode-open",
+  "homepage": "https://github.com/msundvick/vscode-open",
   "bugs": {
     "url": "https://github.com/sandcastle/vscode-open/issues"
   },
@@ -62,12 +65,12 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
-    "watch": "npm run esbuild-base -- --sourcemap --outfile=out/main.js --watch",
-    "compile": "npm run esbuild-base -- --sourcemap --outfile=out/main.js",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "npm run esbuild-base -- --watch",
     "lint": "eslint src --ext ts",
-    "pretest": "npm run compile && npm run lint",
-    "package": "vsce package"
+    "pretest": "npm run esbuild-base && npm run lint",
+    "package": "vsce package",
+    "deploy": "vsce publish"
     },
   "devDependencies": {
     "@types/node": "^12.14.1",
