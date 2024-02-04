@@ -14,7 +14,7 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "compile",
+			"script": "esbuild-base",
 			"problemMatcher": [
 				"$tsc"
 			],
@@ -23,7 +23,7 @@
 				"isDefault": true
 			},
 			"label": "npm: compile",
-			"detail": "tsc -p ./"
+			"detail": "esbuild"
 		},
 		{
 			"type": "npm",
@@ -33,11 +33,8 @@
 			],
 			"group": "build",
 			"label": "npm: watch",
-			"detail": "tsc -watch -p ./",
+			"detail": "esbuild --watch",
 			"isBackground": true,
-			"runOptions": {
-				"runOn": "folderOpen"
-			}
 		},
 		{
 			"type": "npm",
