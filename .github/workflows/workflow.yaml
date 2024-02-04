@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
+      - run: npm run lint
+      - run: npm run esbuild-base
       - name: Publish
         if: github.event_name == 'release'
         run: npm run deploy
